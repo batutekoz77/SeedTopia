@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{0db57cc6-0802-41ca-a69c-57d22cb7fdd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{66dfd0c7-51c9-4e2b-87ec-b15e1297564c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Database">
+      <UniqueIdentifier>{ac3adb9d-c8d9-40fd-86d2-282c8973e3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Security">
+      <UniqueIdentifier>{ddfbac8e-c6af-4e59-876d-2d8d740caee7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Server.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerPool.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Database\Database.cpp">
+      <Filter>Database</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Common\JsonReader.hpp" />
+    <ClInclude Include="Player\PlayerPool.hpp">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Database\Database.hpp">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Security\SendMail.h">
+      <Filter>Security</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
