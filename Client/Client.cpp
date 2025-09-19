@@ -214,7 +214,7 @@ namespace Enet {
                         enet_peer_disconnect_later(event.peer, 0);
                         enet_packet_destroy(event.packet);
                     }
-                    if (event.peer == p.serverPeer && parsed.command == "changeUI" && parsed.has("method")) {
+                    else if (event.peer == p.serverPeer && parsed.command == "changeUI" && parsed.has("method")) {
                         p.UI = parsed.get("method");
                         fmt::print(fmt::fg(fmt::color::yellow), "[CLIENT] Ui changed to {}\n", p.UI);
                     }
@@ -348,6 +348,9 @@ int main() {
     /* Main Menu */
 
 
+    sf::Text titleMenu(fontRoboto, "", 50);
+    titleMenu.setFillColor(sf::Color::White);
+    titleMenu.setPosition(sf::Vector2f(305.f, 130.f));
 
     /* Login Register Menu */
     float panelX = windowSize.x / 2.f;
@@ -479,6 +482,19 @@ int main() {
         while (auto event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>()) {
                 window.close();
+
+                if (p.serverPeer) {
+                    enet_peer_disconnect(p.serverPeer, 0);
+                    p.serverPeer = nullptr;
+                }
+                if (p.client) {
+                    enet_host_destroy(p.client);
+                    p.client = nullptr;
+                }
+
+                enet_deinitialize();
+
+                fmt::print(fmt::fg(fmt::color::yellow), "[CLIENT] Client has been closed and ENet cleaned up.\n");
             }
 
             if (auto* pressed = event->getIf<sf::Event::MouseButtonPressed>()) {
@@ -498,6 +514,9 @@ int main() {
                     connectBtn.handleEvent(*pressed, window);
                     connectBtnForgot.handleEvent(*pressed, window);
                 }
+                else if (p.UI == "WORLD_MENU") {
+
+                }
             }
 
             if (auto* released = event->getIf<sf::Event::MouseButtonReleased>()) {
@@ -514,6 +533,9 @@ int main() {
                     connectBtn.handleEvent(*released, window);
                     connectBtnForgot.handleEvent(*released, window);
                 }
+                else if (p.UI == "WORLD_MENU") {
+
+                }
             }
 
             if (auto* textEvent = event->getIf<sf::Event::TextEntered>()) {
@@ -526,6 +548,9 @@ int main() {
                     regMail.handleEvent(*textEvent);
                     regSeedID.handleEvent(*textEvent);
                     regPassword.handleEvent(*textEvent);
+                }
+                else if (p.UI == "WORLD_MENU") {
+
                 }
             }
         }
@@ -542,6 +567,7 @@ int main() {
             window.draw(checkbox);
             window.draw(checkboxText);
             if (hasSeedID) {
+                titleMenu.setString("Login Menu");
                 sf::RectangleShape line1(sf::Vector2f(6.f, 2.f));
                 line1.setRotation(sf::degrees(45.f));
                 line1.setPosition(sf::Vector2f(checkbox.getPosition().x + 4.f, checkbox.getPosition().y + 10.f));
@@ -569,6 +595,7 @@ int main() {
                 connectBtnForgot.draw(window);
             }
             else {
+                titleMenu.setString("Register Menu");
                 window.draw(regMailLabel);
                 window.draw(regSeedLabel);
                 window.draw(regPasswordLabel);
@@ -582,9 +609,12 @@ int main() {
                 }
                 else if (!errorText.getString().isEmpty()) window.draw(errorText);
             }
+            window.draw(titleMenu);
             connectBtn.draw(window);
         }
+        else if (p.UI == "WORLD_MENU") {
 
+        }
         window.display();
     }
 

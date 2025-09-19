@@ -36,8 +36,9 @@ It combines a custom networking layer, secure database management, and an optimi
 
 - [x] Configurations between main and subservers.
 - [x] Login and Register system.
-- [ ] Mail 2FA Confirmation system.
-- [ ] Forgot Password system.
+- [x] Forgot Password system.
+- [] World Menu system.
+- [] Entering World.
 
 --- 
 
