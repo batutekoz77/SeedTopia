@@ -50,9 +50,9 @@ void UIButton::draw(sf::RenderWindow& window) {
 
 
 
-TextInput::TextInput(const sf::Font& font, const sf::Vector2f& position, unsigned int charSize) {
-    box.setSize({ 300.f, 40.f });
-    box.setFillColor(sf::Color(50, 50, 50));
+TextInput::TextInput(const sf::Font& font, const sf::Vector2f& position, unsigned int charSize, const sf::Vector2f& size) {
+    box.setSize(size);
+    box.setFillColor(sf::Color(115, 156, 166));
     box.setOutlineColor(sf::Color::White);
     box.setOutlineThickness(2.f);
     box.setPosition(position);

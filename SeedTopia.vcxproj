@@ -23,7 +23,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{202b5970-7672-4fb8-992a-a997f134ec83}</ProjectGuid>
-    <RootNamespace>Growtopia2</RootNamespace>
+    <RootNamespace>SeedTopia</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

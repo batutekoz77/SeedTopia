@@ -29,7 +29,7 @@ private:
 
 class TextInput {
 public:
-    TextInput(const sf::Font& font, const sf::Vector2f& position, unsigned int charSize);
+    TextInput(const sf::Font& font, const sf::Vector2f& position, unsigned int charSize, const sf::Vector2f& size);
 
     void handleEvent(const sf::Event::MouseButtonPressed& ev, sf::RenderWindow& window);
     void handleEvent(const sf::Event::MouseButtonReleased& ev, sf::RenderWindow& window);

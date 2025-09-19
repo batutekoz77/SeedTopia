@@ -289,7 +289,7 @@ namespace Enet {
 int main() {
     p.UI = "MAIN_MENU";
 
-    sf::RenderWindow window(sf::VideoMode(sf::Vector2u(1024, 768)), "SFML UI + ENet Example", sf::Style::Titlebar | sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(sf::Vector2u(1024, 768)), "SeedTopia", sf::Style::Titlebar | sf::Style::Close);
     window.setFramerateLimit(60);
     sf::Vector2u windowSize = window.getSize();
 
@@ -306,6 +306,7 @@ int main() {
     if (!bgTexture.loadFromFile("Cache/Interface/main_menu_bg_themed.png")) {
         throw std::runtime_error("Failed to load background texture!");
     }
+
     sf::Texture logoTexture;
     if (!logoTexture.loadFromFile("Cache/Interface/game_title.png")) {
         throw std::runtime_error("Failed to load logo texture!");
@@ -353,6 +354,16 @@ int main() {
     titleMenu.setPosition(sf::Vector2f(305.f, 130.f));
 
     /* Login Register Menu */
+
+    sf::Texture bgTexture2;
+    if (!bgTexture2.loadFromFile("Cache/Interface/generic_menu.png")) {
+        throw std::runtime_error("Failed to load background texture!");
+    }
+
+    sf::Sprite background2(bgTexture2);
+
+
+
     float panelX = windowSize.x / 2.f;
     float panelY = windowSize.y / 2.f;
     sf::Vector2f inputSize(400.f, 40.f);
@@ -373,8 +384,8 @@ int main() {
     bool hasSeedID = false;
 
     // Login Fields
-    TextInput loginSeedID(fontRoboto, { panelX - inputSize.x / 2.f, panelY - 80.f }, 24);
-    TextInput loginPassword(fontRoboto, { panelX - inputSize.x / 2.f, panelY + 10.f }, 24);
+    TextInput loginSeedID(fontRoboto, { panelX - inputSize.x / 2.f, panelY - 80.f }, 24, {300, 40});
+    TextInput loginPassword(fontRoboto, { panelX - inputSize.x / 2.f, panelY + 10.f }, 24, { 300, 40 });
 
     // Login Labels
     sf::Text loginSeedLabel(fontRoboto, "SeedID:", 20);
@@ -388,9 +399,10 @@ int main() {
 
 
     // Register Fields
-    TextInput regMail(fontRoboto, { panelX - inputSize.x / 2.f, panelY - 80.f }, 24);
-    TextInput regSeedID(fontRoboto, { panelX - inputSize.x / 2.f, panelY + 10.f }, 24);
-    TextInput regPassword(fontRoboto, { panelX - inputSize.x / 2.f, panelY + 100.f }, 24);
+    TextInput regMail(fontRoboto, { panelX - inputSize.x / 2.f, panelY - 80.f }, 24, { 300, 40 });
+    TextInput regSeedID(fontRoboto, { panelX - inputSize.x / 2.f, panelY + 10.f }, 24, { 300, 40 });
+    TextInput regPassword(fontRoboto, { panelX - inputSize.x / 2.f, panelY + 100.f }, 24, { 300, 40 });
+
 
     // Register Labels
     sf::Text regMailLabel(fontRoboto, "Email:", 20);
@@ -478,6 +490,18 @@ int main() {
     /* Login Register Menu Draw */
 
 
+    /* World Menu Draw */
+
+    sf::Text inputText(fontBoldRoboto, "World Name:", 40);
+    inputText.setFillColor(sf::Color::White);
+    inputText.setPosition(sf::Vector2f(60, 150));
+
+    TextInput input_world(fontBoldRoboto, { 325, 158 }, 24, { 530, 40 });
+
+
+
+    /* World Menu Draw */
+
     while (window.isOpen()) {
         while (auto event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>()) {
@@ -515,7 +539,7 @@ int main() {
                     connectBtnForgot.handleEvent(*pressed, window);
                 }
                 else if (p.UI == "WORLD_MENU") {
-
+                    input_world.handleEvent(*pressed, window);
                 }
             }
 
@@ -534,7 +558,7 @@ int main() {
                     connectBtnForgot.handleEvent(*released, window);
                 }
                 else if (p.UI == "WORLD_MENU") {
-
+                    input_world.handleEvent(*released, window);
                 }
             }
 
@@ -550,7 +574,7 @@ int main() {
                     regPassword.handleEvent(*textEvent);
                 }
                 else if (p.UI == "WORLD_MENU") {
-
+                    input_world.handleEvent(*textEvent);
                 }
             }
         }
@@ -564,6 +588,7 @@ int main() {
             window.draw(bottomRight);
         }
         else if (p.UI == "LOGIN_REGISTER") {
+            window.draw(background2);
             window.draw(checkbox);
             window.draw(checkboxText);
             if (hasSeedID) {
@@ -613,8 +638,14 @@ int main() {
             connectBtn.draw(window);
         }
         else if (p.UI == "WORLD_MENU") {
+            window.draw(background2);
+
+            window.draw(inputText);
+            input_world.draw(window);
+
 
         }
+
         window.display();
     }
 
