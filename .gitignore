@@ -1,0 +1,30 @@
+# Visual Studio temporary files
+.vs/
+*.suo
+*.VC.db
+*.user
+*.ipch
+
+# Build folders
+bin/
+build/
+Debug/
+Release/
+x64/
+
+# Ignore ENET completely
+ENET/
+
+# Ignore everything else
+*
+!.gitignore
+!Client/
+!Common/
+!Server/
+!Growtopia2.sln
+!Growtopia2.vcxproj
+!Growtopia2.vcxproj.filters
+!Growtopia2.vcxproj.user
+!LICENSE
+!README.md
+!config.jsonCLON
